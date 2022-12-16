@@ -9,7 +9,7 @@ export default class ExampleSeeder extends Seeder {
         name: 'Пример',
       },
     ];
-
-    await this.createMany(examples);
+		console.log(examples);
+    // await this.createMany(examples);
   }
 }
