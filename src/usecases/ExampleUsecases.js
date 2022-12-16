@@ -1,14 +1,15 @@
-import Usecase from './Usecase.js';
+import Usecases from '../core/base/usecases/Usecases.js';
 
-export default class ExampleUsecase extends Usecase {
+export default class ExampleUsecases extends Usecases {
   /**
    * @param {ExampleRepository} exampleRepository
+   * @param {object} request
    * @returns {Promise<{text: string}>}
    */
-  async index({ exampleRepository }) {
-    console.log(this.request);
+  async list({ exampleRepository, request }) {
+    console.log(request);
     console.log('ExampleRepository table name: ', exampleRepository.table);
-    return { text: 'index' };
+    return { text: 'list' };
   }
 
   /**
@@ -44,6 +45,6 @@ export default class ExampleUsecase extends Usecase {
    * @returns {Promise<{file: Buffer, filename: *, contentType: *}>}
    */
   async print({ fileService }) {
-    return fileService.get(this.request.path);
+    return fileService.get('exampleFile.txt');
   }
 }

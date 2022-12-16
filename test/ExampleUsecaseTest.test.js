@@ -1,17 +1,17 @@
-import ExampleUsecase from '../src/usecases/ExampleUsecase.js';
+import ExampleUsecases from '../src/usecases/ExampleUsecases.js';
 import FileService from '../src/services/FileService.js';
 import ExampleRepository from '../src/repositories/ExampleRepository.js';
 import prisma from '../libs/prisma/prisma.js';
 import fs from 'fs';
 
-const usecase = new ExampleUsecase({ path: 'exampleFile.txt' });
+const usecase = new ExampleUsecases();
 
-test('Example index', async () => {
+test('Example list', async () => {
   expect(
-    await usecase.index({
-      exampleRepository: new ExampleRepository({ prisma })
-    })
-  ).toEqual({ text: 'index' });
+    await usecase.list({
+      exampleRepository: new ExampleRepository({ prisma }),
+    }),
+  ).toEqual({ text: 'list' });
 });
 
 test('Example create', async () => {
@@ -32,12 +32,12 @@ test('Example delete', async () => {
 
 test('Example print', async () => {
   const file = await usecase.print({
-    fileService: new FileService({ documentsPath: process.env.DOCUMENTS_PATH })
+    fileService: new FileService({ documentsPath: process.env.DOCUMENTS_PATH }),
   });
 
   expect(file).toEqual({
     contentType: 'text/plain',
     filename: 'exampleFile.txt',
-    file: fs.readFileSync('documents/exampleFile.txt')
+    file: fs.readFileSync('documents/exampleFile.txt'),
   });
 });

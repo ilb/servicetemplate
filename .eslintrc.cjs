@@ -1,5 +1,6 @@
 module.exports = {
   root: true,
+  ignorePatterns: ['node_modules/*', '.eslintrc.js'],
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
@@ -19,8 +20,21 @@ module.exports = {
     es6: true,
     'jest/globals': true
   },
-  extends: ['eslint:recommended', 'plugin:prettier/recommended', 'plugin:jest/recommended'],
+  extends: [
+    'plugin:prettier/recommended',
+    'plugin:jest/recommended'
+  ],
   rules: {
-    'prettier/prettier': ['error', {}, { usePrettierrc: true }]
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+        semi: true,
+        printWidth: 100,
+        singleQuote: true,
+        trailingComma: 'all',
+        jsxBracketSameLine: true
+      }
+    ],
   }
 };
